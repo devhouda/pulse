@@ -1,5 +1,4 @@
 import { useParams } from "react-router";
-import Navbar from "./Navbar";
 
 const Profile = () => {
   let params = useParams();
@@ -7,7 +6,6 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar />
       <div>{username}</div>
     </>
   );
