@@ -1,10 +1,6 @@
-import "./App.css";
-import Navbar from "./components/Navbar";
-
-function App() {
+const Feed = () => {
   return (
-    <>
-      <Navbar />
+    <div>
       <div>
         <h3>Post1</h3>
         <p>lorem desc pro max iphone pc laptop macbook</p>
@@ -17,8 +13,8 @@ function App() {
         <h3>Post3</h3>
         <p>lorem desc pro max iphone pc laptop macbook</p>
       </div>
-    </>
+    </div>
   );
-}
+};
 
-export default App;
+export default Feed;
