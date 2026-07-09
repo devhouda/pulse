@@ -1,0 +1,24 @@
+.feed {
+  max-width: 80%;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.post {
+  max-width: 30%;
+  border: 1px solid #d0d6d6;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.title {
+  color: #042630;
+  margin-bottom: 4px;
+}
+
+.description {
+  color: #898d8d;
+  font-size: 14px;
+}
