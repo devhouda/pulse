@@ -1,9 +1,13 @@
+import styles from "./Login.module.css";
+
 const Login = () => {
   return (
-    <form>
-      <input placeholder="Username" />
-      <input placeholder="Password" />
-      <button type="submit">Login</button>
+    <form className={styles.login}>
+      <input className={styles.input} placeholder="Username" />
+      <input className={styles.input} placeholder="Password" />
+      <button className={styles.btn} type="submit">
+        Login
+      </button>
     </form>
   );
 };
