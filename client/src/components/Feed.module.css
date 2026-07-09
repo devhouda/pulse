@@ -3,11 +3,12 @@
   margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   gap: 20px;
 }
 
 .post {
-  max-width: 30%;
+  max-width: 500px;
   border: 1px solid #d0d6d6;
   border-radius: 8px;
   padding: 20px;
