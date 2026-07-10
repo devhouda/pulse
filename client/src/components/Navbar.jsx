@@ -1,19 +1,35 @@
 import styles from "./Navbar.module.css";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 
 const Navbar = () => {
   return (
     <nav className={styles.navbar}>
-      <Link className={styles.link} to="/">
+      <NavLink
+        to="/"
+        className={({ isActive }) => (isActive ? styles.active : styles.link)}
+      >
         Feed
-      </Link>
+      </NavLink>
+      {/* change later to "/post/:id" */}
+      <NavLink
+        to="/post/post1id123"
+        className={({ isActive }) => (isActive ? styles.active : styles.link)}
+      >
+        Post1
+      </NavLink>
       {/* change later to "/profile/:username" */}
-      <Link className={styles.link} to="/profile/devhouda">
+      <NavLink
+        to="/profile/devhouda"
+        className={({ isActive }) => (isActive ? styles.active : styles.link)}
+      >
         Profile
-      </Link>
-      <Link className={styles.link} to="/login">
+      </NavLink>
+      <NavLink
+        to="/login"
+        className={({ isActive }) => (isActive ? styles.active : styles.link)}
+      >
         Login
-      </Link>
+      </NavLink>
     </nav>
   );
 };

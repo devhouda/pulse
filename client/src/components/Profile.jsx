@@ -6,7 +6,7 @@ const Profile = () => {
 
   return (
     <>
-      <div>{username}</div>
+      <div style={{ textAlign: "center", marginTop: "50px" }}>{username}</div>
     </>
   );
 };
