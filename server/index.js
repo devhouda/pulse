@@ -30,12 +30,12 @@ app.get("/api/posts/:id", (req, res) => {
   const id = Number(req.params.id);
   const foundPost = posts.find((post) => post.id === id);
   if (!foundPost) {
-    res.status(404).json({
+    return res.status(404).json({
       error: "Not Found",
       message: `The requested post with id '${id}' does not exist.`,
     });
   }
-  res.send(foundPost);
+  res.json(foundPost);
 });
 
 app.post("/api/posts", (req, res) => {
@@ -49,7 +49,7 @@ app.post("/api/posts", (req, res) => {
   };
 
   posts.push(newPost);
-  res.send(newPost);
+  res.json(newPost);
 });
 
 app.use((req, res, next) => {
