@@ -12,7 +12,7 @@ const Navbar = () => {
       </NavLink>
       {/* change later to "/post/:id" */}
       <NavLink
-        to="/post/post1id123"
+        to="/post/1"
         className={({ isActive }) => (isActive ? styles.active : styles.link)}
       >
         Post1
