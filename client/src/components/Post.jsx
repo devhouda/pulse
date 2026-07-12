@@ -12,11 +12,14 @@ const Post = () => {
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/posts/${id}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`Post not found`);
+        return res.json();
+      })
       .then((data) => setPost(data))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [id]);
 
   if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
   if (error) return <p style={{ textAlign: "center" }}>Error: {error}</p>;
