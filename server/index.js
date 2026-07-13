@@ -1,56 +1,38 @@
 const express = require("express");
 const cors = require("cors");
+const pool = require("./db");
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(express.json());
 
-const posts = [
-  {
-    id: 1,
-    title: "Post1",
-    description: "description of post 1",
-  },
-  {
-    id: 2,
-    title: "Post2",
-    description: "description of post 2",
-  },
-  {
-    id: 3,
-    title: "Post3",
-    description: "description of post 3",
-  },
-];
-
-app.get("/api/posts", (req, res) => {
-  res.json(posts);
+app.get("/api/posts", async (req, res) => {
+  const result = await pool.query("SELECT * FROM posts ORDER BY id");
+  res.json(result.rows);
 });
 
-app.get("/api/posts/:id", (req, res) => {
+app.get("/api/posts/:id", async (req, res) => {
   const id = Number(req.params.id);
-  const foundPost = posts.find((post) => post.id === id);
+  const foundPost = await pool.query("SELECT * FROM posts WHERE id = $1", [id]);
   if (!foundPost) {
     return res.status(404).json({
       error: "Not Found",
       message: `The requested post with id '${id}' does not exist.`,
     });
   }
-  res.json(foundPost);
+  res.json(foundPost.rows[0]);
 });
 
-app.post("/api/posts", (req, res) => {
+app.post("/api/posts", async (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
 
-  const newPost = {
-    id: posts.length + 1,
-    title,
-    description,
-  };
+  const newPost = await pool.query(
+    "INSERT INTO posts (title, description) VALUES ($1, $2) RETURNING *",
+    [title, description],
+  );
 
-  posts.push(newPost);
   res.json(newPost);
 });
 
