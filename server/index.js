@@ -14,14 +14,14 @@ app.get("/api/posts", async (req, res) => {
 
 app.get("/api/posts/:id", async (req, res) => {
   const id = Number(req.params.id);
-  const foundPost = await pool.query("SELECT * FROM posts WHERE id = $1", [id]);
-  if (!foundPost) {
+  const result = await pool.query("SELECT * FROM posts WHERE id = $1", [id]);
+  if (result.rows.length === 0) {
     return res.status(404).json({
       error: "Not Found",
       message: `The requested post with id '${id}' does not exist.`,
     });
   }
-  res.json(foundPost.rows[0]);
+  res.json(result.rows[0]);
 });
 
 app.post("/api/posts", async (req, res) => {
@@ -33,7 +33,7 @@ app.post("/api/posts", async (req, res) => {
     [title, description],
   );
 
-  res.json(newPost);
+  res.json(newPost.rows[0]);
 });
 
 app.use((req, res, next) => {
