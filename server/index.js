@@ -40,8 +40,13 @@ app.post("/api/posts", async (req, res) => {
 
 app.post("/api/signup", async (req, res) => {
   const { username, password } = req.body;
-  const hash = await bcrypt.hash(password, 10);
+  if (!username || !password) {
+    return res
+      .status(400)
+      .json({ error: "Username and password are required" });
+  }
   try {
+    const hash = await bcrypt.hash(password, 10);
     const result = await pool.query(
       "INSERT INTO users (username, password_hash) VALUES ($1, $2) RETURNING id, username",
       [username, hash],
